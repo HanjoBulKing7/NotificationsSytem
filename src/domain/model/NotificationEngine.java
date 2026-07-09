@@ -3,30 +3,35 @@ package domain.model;
 public class NotificationEngine{
 
     private Notification[] notifications;
-    private Integer currentIndex;
+    private int currentIndex = 0;
 
     public NotificationEngine(Notification[] notifications) {
         this.notifications = notifications;
     }
 
 
-    private String fillArray(Notification lastNotification){
+    public String addNotification(Notification lastNotification){
         if(currentIndex >= notifications.length )
             throw new
                     IndexOutOfBoundsException("Se excedió la capacidad del sistema ya no se pueden enviar más notificaciones");
+
+        notifications[currentIndex] = lastNotification;
 
         currentIndex++;
         return "Notification saved successfully";
     }
 
     public String printStats(int[] currentStats){
-        StringBuilder sb = new StringBuilder();
-        sb.append("========= RESUMEN =========\n");
-        sb.append("Correos enviados: "+ currentStats[1] + "\n");
-        sb.append("SMS enviados: "+ currentStats[0] + "\n");
-        sb.append("Push enviados: "+ currentStats[2] + "\n");
+        int total = 0;
+        for(int c: currentStats ){
+            total+=c;
+        }
 
-        return sb.toString();
+        return "========= RESUMEN =========\n" +
+                "Correos enviados: " + currentStats[1] + "\n" +
+                "SMS enviados: " + currentStats[0] + "\n" +
+                "Push enviados: " + currentStats[2] + "\n" +
+                "Total: " + total;
     }
 
     public Notification[] getNotifications() {

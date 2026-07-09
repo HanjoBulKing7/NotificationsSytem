@@ -2,6 +2,7 @@ package service;
 
 import constants.NotificationEnum;
 import domain.model.*;
+import exceptions.InvalidArgumentCustomException;
 
 import java.util.Scanner;
 
@@ -17,17 +18,13 @@ public class MatchStrategyService {
 
     private Notification matchNotification(NotificationEnum n, Scanner sc){
 
-        switch (n) {
-            case NotificationEnum.SMS-> {
-                return SmsNotification.setData(sc);
-            }
-            case NotificationEnum.PUSH -> {
-                return PushNotification.setData(sc);
-            }
-            case NotificationEnum.EMAIL -> {
-                return EmailNotification.setData(sc);
-            }
-        }
+
+         return switch (n) {
+             case NotificationEnum.SMS -> SmsNotification.setData(sc);
+             case NotificationEnum.PUSH -> PushNotification.setData(sc);
+             case NotificationEnum.EMAIL -> EmailNotification.setData(sc);
+             default -> throw new InvalidArgumentCustomException("Invalid kind of notification");
+         };
     }
 
     private int[] countNotifications(Notification[] arr) {

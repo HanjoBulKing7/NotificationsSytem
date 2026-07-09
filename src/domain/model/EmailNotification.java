@@ -44,21 +44,20 @@ public  record EmailNotification(
         String message = sc.nextLine();
 
         LocalDateTime timeStamp = LocalDateTime.now();
+        sc.close();
         return new EmailNotification(emailAddress, message, timeStamp);
     }
 
     @Override
     public LocalDateTime timeStamp() {
-        return null;
+        return timeStamp;
     }
 
     @Override
     public String getSummary() {
-        return "";
+        return "El correo para: " + emailAddress + " es: " + message+
+                "\n timestamp"+this.getFormattedDate();
     }
 
-    @Override
-    public String getFormattedDate() {
-        return Notification.super.getFormattedDate();
-    }
+
 }
