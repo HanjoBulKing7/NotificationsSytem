@@ -52,7 +52,6 @@ public record SmsNotification (
         String message = sc.nextLine();
 
         LocalDateTime timeNow = LocalDateTime.now();
-        sc.close();
         return new SmsNotification(phoneNumber, message, timeNow);
     }
 }

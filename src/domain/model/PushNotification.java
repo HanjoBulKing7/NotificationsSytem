@@ -66,7 +66,6 @@ public final record PushNotification(
         String message = sc.nextLine();
 
         LocalDateTime timeStamp = LocalDateTime.now();
-        sc.close();
         return new PushNotification(token, message, timeStamp);
     }
 }
