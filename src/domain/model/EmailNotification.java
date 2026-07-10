@@ -1,7 +1,5 @@
 package domain.model;
 
-import exceptions.InvalidArgumentCustomException;
-
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -24,16 +22,16 @@ public  record EmailNotification(
     public EmailNotification{
 
         if(!validateEmail(emailAddress))
-            throw new InvalidArgumentCustomException("Ingrese una dirección de correo electrónico válida");
+            throw new IllegalArgumentException("Ingrese una dirección de correo electrónico válida");
 
         if(message == null ){
-            throw new InvalidArgumentCustomException("Ingrese un mensaje por favor");
+            throw new IllegalArgumentException("Ingrese un mensaje por favor");
         }
 
         message = message.trim();
 
         if(message.isEmpty())
-            throw new InvalidArgumentCustomException("Ingrese un mensaje por favor");
+            throw new IllegalArgumentException("Ingrese un mensaje por favor");
     }
 
     public static Notification setData(Scanner sc){

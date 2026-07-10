@@ -2,7 +2,6 @@ package service;
 
 import constants.NotificationEnum;
 import domain.model.*;
-import exceptions.InvalidArgumentCustomException;
 
 import java.util.Scanner;
 
@@ -19,7 +18,7 @@ public class MatchStrategyService {
             case NotificationEnum.SMS -> SmsNotification.setData(sc);
             case NotificationEnum.PUSH -> PushNotification.setData(sc);
             case NotificationEnum.EMAIL -> EmailNotification.setData(sc);
-            default -> throw new InvalidArgumentCustomException("Invalid kind of notification");
+            default -> throw new IllegalArgumentException("Invalid kind of notification");
         };
     }
 

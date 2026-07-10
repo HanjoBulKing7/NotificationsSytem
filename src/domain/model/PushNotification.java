@@ -1,11 +1,11 @@
 package domain.model;
 
-import exceptions.InvalidArgumentCustomException;
 
-import java.time.LocalDate;
+import java.lang.IllegalArgumentException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.UUID;
+
 
 public final record PushNotification(
     String token,
@@ -29,13 +29,13 @@ public final record PushNotification(
         message = message.trim();
 
         if(message.isEmpty())
-            throw new InvalidArgumentCustomException("Ingrese un mensaje por favor");
+            throw new IllegalArgumentException("Ingrese un mensaje por favor");
 
         if(timeStamp == null)
             throw new NullPointerException("Timestamp must not be null"); /// Programmer exceptions so they can be in english
 
         if(timeStamp.isAfter(LocalDateTime.now()))
-            throw new InvalidArgumentCustomException("Timestamp cannot occur in the future");/// Programmer exceptions so they can be in english
+            throw new IllegalArgumentException("Timestamp cannot occur in the future");/// Programmer exceptions so they can be in english
     }
 
     @Override
